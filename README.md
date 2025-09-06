@@ -188,4 +188,3 @@ MIT License - feel free to use this code for learning and development.
 
 ---
 
-**Built with ❤️ for the DeFi community**
