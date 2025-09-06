@@ -1,0 +1,707 @@
+/* DeFi Drag & Drop Dashboard Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Wallet Status */
+.wallet-status {
+    margin-bottom: 20px;
+}
+
+.wallet-info {
+    background: rgba(100, 255, 218, 0.1);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.wallet-info.hidden {
+    display: none;
+}
+
+.wallet-address {
+    font-weight: 600;
+    color: #64ffda;
+    margin-bottom: 5px;
+}
+
+.wallet-balance {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Enhanced Draggable Blocks */
+.token-price {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    float: right;
+}
+
+/* Protocol specific colors */
+.protocol.maker {
+    background: linear-gradient(135deg, rgba(26, 165, 139, 0.2), rgba(22, 130, 108, 0.2));
+    border-color: rgba(26, 165, 139, 0.5);
+}
+
+.protocol.compound {
+    background: linear-gradient(135deg, rgba(0, 217, 160, 0.2), rgba(0, 180, 132, 0.2));
+    border-color: rgba(0, 217, 160, 0.5);
+}
+
+.protocol.aave {
+    background: linear-gradient(135deg, rgba(182, 76, 218, 0.2), rgba(150, 60, 180, 0.2));
+    border-color: rgba(182, 76, 218, 0.5);
+}
+
+.protocol.uniswap {
+    background: linear-gradient(135deg, rgba(255, 0, 122, 0.2), rgba(200, 0, 95, 0.2));
+    border-color: rgba(255, 0, 122, 0.5);
+}
+
+.protocol.curve {
+    background: linear-gradient(135deg, rgba(70, 130, 180, 0.2), rgba(65, 105, 225, 0.2));
+    border-color: rgba(70, 130, 180, 0.5);
+}
+
+.protocol.yearn {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.2), rgba(0, 86, 179, 0.2));
+    border-color: rgba(0, 123, 255, 0.5);
+}
+
+/* Sidebar Controls */
+.sidebar-controls {
+    margin-top: 30px;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.control-buttons button {
+    flex: 1;
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 8px;
+    padding: 8px;
+    color: #64ffda;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-buttons button:hover {
+    background: rgba(100, 255, 218, 0.1);
+    border-color: #64ffda;
+}
+
+/* App Header */
+.app-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #64ffda;
+}
+
+/* Workflow Area */
+.workflow-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.canvas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.canvas-header h3 {
+    color: #64ffda;
+    font-weight: 500;
+    margin: 0;
+}
+
+.flow-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.flow-btn {
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #64ffda;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.flow-btn:hover {
+    background: rgba(100, 255, 218, 0.1);
+    border-color: #64ffda;
+}
+
+/* Enhanced Canvas */
+.sidebar {
+    width: 280px;
+    background: rgba(20, 20, 40, 0.9);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(100, 255, 218, 0.2);
+    padding: 20px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    color: #64ffda;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.sidebar h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, #64ffda, transparent);
+}
+
+/* Draggable Blocks */
+.draggable-block {
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    cursor: grab;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.draggable-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(100, 255, 218, 0.15);
+    border-color: #64ffda;
+    background: rgba(30, 30, 60, 0.9);
+}
+
+.draggable-block:active {
+    cursor: grabbing;
+    transform: scale(0.98);
+}
+
+/* Protocol Blocks */
+.protocol {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(75, 0, 130, 0.2));
+    border-color: rgba(138, 43, 226, 0.5);
+    color: #dda0dd;
+}
+
+.protocol:hover {
+    border-color: #dda0dd;
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+}
+
+/* Token Blocks */
+.token {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));
+    border-color: rgba(255, 215, 0, 0.5);
+    color: #ffd700;
+}
+
+.token:hover {
+    border-color: #ffd700;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+/* Action Blocks */
+.action {
+    background: linear-gradient(135deg, rgba(0, 255, 127, 0.2), rgba(0, 128, 0, 0.2));
+    border-color: rgba(0, 255, 127, 0.5);
+    color: #00ff7f;
+}
+
+.action:hover {
+    border-color: #00ff7f;
+    box-shadow: 0 8px 25px rgba(0, 255, 127, 0.3);
+}
+
+/* Connect Wallet Button */
+#connectWallet {
+    width: 100%;
+    background: linear-gradient(135deg, #64ffda, #4fc3f7);
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    color: #0f0f23;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#connectWallet:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(100, 255, 218, 0.4);
+    background: linear-gradient(135deg, #4fc3f7, #64ffda);
+}
+
+#connectWallet.connected {
+    background: linear-gradient(135deg, #00ff7f, #32cd32);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-content h1 {
+    color: #64ffda;
+    font-size: 2.5rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+}
+
+/* Enhanced Canvas */
+.canvas {
+    flex: 1;
+    background: rgba(15, 15, 35, 0.6);
+    border: 2px dashed rgba(100, 255, 218, 0.3);
+    border-radius: 20px;
+    padding: 40px;
+    min-height: 350px;
+    position: relative;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-content: flex-start;
+}
+
+/* Flow Lines Container */
+.flow-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.flow-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, #64ffda, transparent);
+    opacity: 0.6;
+    animation: flowAnimation 2s infinite;
+}
+
+@keyframes flowAnimation {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Transaction Summary */
+.transaction-summary {
+    background: rgba(20, 20, 40, 0.9);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.transaction-summary h4 {
+    color: #64ffda;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.summary-content {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+/* Execution Panel */
+.execution-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.execution-info {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Enhanced Dropped Blocks */
+.canvas .dropped-block {
+    background: rgba(40, 40, 80, 0.9);
+    border: 1px solid rgba(100, 255, 218, 0.5);
+    border-radius: 12px;
+    padding: 15px 20px;
+    cursor: move;
+    position: relative;
+    min-width: 140px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    z-index: 10;
+}
+
+.canvas .dropped-block.connecting {
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
+    border-color: #64ffda;
+}
+
+.canvas .dropped-block .block-icon {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.canvas .dropped-block .block-details {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+.canvas .dropped-block .amount-input {
+    background: transparent;
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: #64ffda;
+    font-size: 0.8rem;
+    width: 80px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.canvas .dropped-block .amount-input:focus {
+    outline: none;
+    border-color: #64ffda;
+}
+
+/* Sidebar Styles */
+
+.canvas.drag-over {
+    border-color: #64ffda;
+    background: rgba(100, 255, 218, 0.05);
+    box-shadow: inset 0 0 30px rgba(100, 255, 218, 0.1);
+}
+
+.canvas-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(224, 224, 224, 0.5);
+    font-size: 1.2rem;
+    text-align: center;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.canvas.has-blocks .canvas-placeholder {
+    opacity: 0;
+}
+
+/* Dropped Blocks in Canvas */
+.canvas .dropped-block {
+    background: rgba(40, 40, 80, 0.9);
+    border: 1px solid rgba(100, 255, 218, 0.5);
+    border-radius: 12px;
+    padding: 15px 20px;
+    cursor: move;
+    position: relative;
+    min-width: 120px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.canvas .dropped-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+}
+
+.canvas .dropped-block .block-type {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.canvas .dropped-block .remove-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background: #ff4757;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.canvas .dropped-block .remove-btn:hover {
+    transform: scale(1.2);
+    background: #ff3838;
+}
+
+/* Execute Button */
+#executeBtn {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    border: none;
+    border-radius: 12px;
+    padding: 16px 40px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    align-self: center;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 200px;
+}
+
+#executeBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+    background: linear-gradient(135deg, #ff8e8e, #ff6b6b);
+}
+
+#executeBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Connection Lines */
+.connection-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, #64ffda, #4fc3f7);
+    opacity: 0.6;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+/* Transaction Flow Visualization */
+.flow-indicator {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: rgba(100, 255, 218, 0.1);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    color: #64ffda;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+
+    .app-header h1 {
+        font-size: 2rem;
+    }
+
+    .header-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .canvas {
+        min-height: 300px;
+        padding: 20px;
+    }
+
+    .control-buttons {
+        flex-direction: column;
+    }
+
+    .flow-controls {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Animation for dragging */
+.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(100, 255, 218, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 255, 218, 0.5);
+}
+
+/* Loading Animation */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 2s infinite;
+}
+
+/* Success Animation */
+@keyframes success-glow {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 255, 127, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 127, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(0, 255, 127, 0.5);
+    }
+}
+
+.success-animation {
+    animation: success-glow 1.5s ease-in-out;
+}

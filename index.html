@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeFi Drag & Drop Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="wallet-status">
+                <div id="walletInfo" class="wallet-info hidden">
+                    <div class="wallet-address">0x742d...96B2</div>
+                    <div class="wallet-balance">Balance: 5.24 ETH</div>
+                </div>
+            </div>
+
+            <h2>Protocols</h2>
+            <div class="protocols">
+                <div class="draggable-block protocol maker" draggable="true" data-type="protocol" data-name="MakerDAO"
+                    data-icon="🏦">
+                    🏦 MakerDAO</div>
+                <div class="draggable-block protocol compound" draggable="true" data-type="protocol"
+                    data-name="Compound" data-icon="💰">
+                    💰 Compound</div>
+                <div class="draggable-block protocol aave" draggable="true" data-type="protocol" data-name="Aave"
+                    data-icon="👻">
+                    👻 Aave</div>
+                <div class="draggable-block protocol uniswap" draggable="true" data-type="protocol" data-name="Uniswap"
+                    data-icon="🦄">
+                    🦄 Uniswap</div>
+                <div class="draggable-block protocol curve" draggable="true" data-type="protocol" data-name="Curve"
+                    data-icon="🔵">
+                    🔵 Curve</div>
+                <div class="draggable-block protocol yearn" draggable="true" data-type="protocol" data-name="Yearn"
+                    data-icon="💎">
+                    💎 Yearn</div>
+            </div>
+
+            <h2>Tokens</h2>
+            <div class="tokens">
+                <div class="draggable-block token eth" draggable="true" data-type="token" data-name="ETH"
+                    data-price="$2,450">
+                    ETH <span class="token-price">$2,450</span></div>
+                <div class="draggable-block token dai" draggable="true" data-type="token" data-name="DAI"
+                    data-price="$1.00">
+                    DAI <span class="token-price">$1.00</span></div>
+                <div class="draggable-block token usdc" draggable="true" data-type="token" data-name="USDC"
+                    data-price="$1.00">
+                    USDC <span class="token-price">$1.00</span></div>
+                <div class="draggable-block token wbtc" draggable="true" data-type="token" data-name="WBTC"
+                    data-price="$42,500">
+                    WBTC <span class="token-price">$42,500</span></div>
+                <div class="draggable-block token link" draggable="true" data-type="token" data-name="LINK"
+                    data-price="$15.20">
+                    LINK <span class="token-price">$15.20</span></div>
+                <div class="draggable-block token uni" draggable="true" data-type="token" data-name="UNI"
+                    data-price="$8.45">
+                    UNI <span class="token-price">$8.45</span></div>
+            </div>
+
+            <h2>Actions</h2>
+            <div class="actions">
+                <div class="draggable-block action deposit" draggable="true" data-type="action" data-name="Deposit"
+                    data-icon="📥">
+                    📥 Deposit</div>
+                <div class="draggable-block action borrow" draggable="true" data-type="action" data-name="Borrow"
+                    data-icon="📤">
+                    📤 Borrow</div>
+                <div class="draggable-block action swap" draggable="true" data-type="action" data-name="Swap"
+                    data-icon="🔄">
+                    🔄 Swap</div>
+                <div class="draggable-block action repay" draggable="true" data-type="action" data-name="Repay"
+                    data-icon="💳">
+                    💳 Repay</div>
+                <div class="draggable-block action withdraw" draggable="true" data-type="action" data-name="Withdraw"
+                    data-icon="💸">
+                    💸 Withdraw</div>
+                <div class="draggable-block action stake" draggable="true" data-type="action" data-name="Stake"
+                    data-icon="🔒">
+                    🔒 Stake</div>
+            </div>
+
+            <div class="sidebar-controls">
+                <button id="connectWallet">Connect Wallet</button>
+                <div class="control-buttons">
+                    <button id="saveWorkflow" title="Save Workflow (Ctrl+S)">💾 Save</button>
+                    <button id="loadWorkflow" title="Load Workflow (Ctrl+L)">📂 Load</button>
+                    <button id="clearCanvas" title="Clear Canvas (Ctrl+Del)">🗑️ Clear</button>
+                </div>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="app-header">
+                <h1>DeFi Transaction Composer</h1>
+                <div class="header-stats">
+                    <div class="stat">
+                        <span class="stat-label">Total Protocols</span>
+                        <span class="stat-value" id="protocolCount">6</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Active Blocks</span>
+                        <span class="stat-value" id="blockCount">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Est. Gas</span>
+                        <span class="stat-value" id="gasEstimate">0 ETH</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="workflow-area">
+                <div class="canvas-header">
+                    <h3>Transaction Pipeline</h3>
+                    <div class="flow-controls">
+                        <button id="validateFlow" class="flow-btn">🔍 Validate</button>
+                        <button id="previewTransaction" class="flow-btn">👁️ Preview</button>
+                    </div>
+                </div>
+
+                <div class="canvas" id="workflowCanvas">
+                    <p class="canvas-placeholder">
+                        Drag blocks here to build your transaction pipeline
+                        <br>
+                        <small>Need: Protocol + Token + Action to execute</small>
+                    </p>
+                    <div class="flow-lines" id="flowLines"></div>
+                </div>
+
+                <div class="transaction-summary" id="transactionSummary">
+                    <h4>Transaction Summary</h4>
+                    <div class="summary-content">
+                        <p>No transaction configured yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="execution-panel">
+                <button id="executeBtn">Execute Transaction</button>
+                <div class="execution-info">
+                    <span id="executionStatus">Ready to execute</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app-enhanced.js"></script>
+</body>
+
+</html>
